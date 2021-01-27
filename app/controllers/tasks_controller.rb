@@ -16,6 +16,7 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.new(task_params)
     if @task.save
+      logger.debug "task: #{@task.attributes.inspect}"
       redirect_to tasks_path, notice: "タスク#{@task.name}を保存しました"
     else
       render 'new'
